@@ -32,19 +32,36 @@
 (define gravity 9.8)  ;; in m/s
 (define pi 3.14159)
 
+;; defining the placeholder
+(define YOUR-CODE-HERE
+  (lambda (n)
+  (write n)))
+
+;; make some testing tools
+(define assert
+  (lambda (func expected)
+  (if (= func expected)
+      "the test passes"
+      (write "the actual value does not match the expected value"))))
+
+(define assertN
+  (lambda (func expected name)
+  (if (= func expected)
+      (string-append name " passes")
+      (string-append  name " does not pass.  the actual value does not match the expected value"))))
 ;; Problem 1
 
 (define position
   (lambda (a v u t)
-    YOUR-CODE-HERE))
+    (+ (* 0.5 a (square t)) (* v t) u)))
 
 ;; you need to complete this procedure, then show some test cases
-
-; (position 0 0 0 0)
-; (position 0 0 20 0)
-; (position 0 5 10 10)
-; (position 2 2 2 2)
-; (position 5 5 5 5)
+(assertN (position 0 0 0 0) 0 "simple test")
+(assert (position 0 0 0 0) 0)
+(assert (position 0 0 20 0) 20)
+(assert (position 0 5 10 10) 60)
+(assert (position 2 2 2 2) 10.0)
+(assert (position 5 5 5 5) 92.5)
 
 
 ;; Problem 2
