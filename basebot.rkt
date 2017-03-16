@@ -48,7 +48,7 @@
   (lambda (func expected name)
   (if (= func expected)
       (string-append name " passes")
-      (string-append  name " does not pass.  the actual value does not match the expected value"))))
+      (string-append  name " does not pass.  the expected value does not match the actual value: " func))))
 ;; Problem 1
 
 (define position
@@ -68,11 +68,23 @@
 
 (define root1
   (lambda (a b c)
-    YOUR-CODE-HERE))
+    (/ (+ (- 0 b) (sqrt (- (* b b) (* 4 a c)))) (* 2 a))))
+(integer? 1)
 
 (define root2
   (lambda (a b c)
-    YOUR-CODE-HERE))
+ (/ (- (- 0 b) (sqrt (- (* b b) (* 4 a c)))) (* 2 a))))
+
+;;;; tests for root1
+(assertN (root1 1 2 1) -1 "root1: simple test" )
+(assertN (root1 1 8 7) -1 "root1: simple test negative number" )
+(assertN (root1 1 -8 7) 7 "root1: simple test positive root" )
+(assertN (root1 5 3 6) 1 "root1: handle imaginary root" )
+
+;;;; tests for root2
+(assertN (root2 1 2 1) -1 "root1: simple test" )
+(assertN (root2 1 8 7) -7 "root1: simple test negative number" )
+(assertN (root2 1 -8 7) 1 "root1: simple test positive root" )
 
 ;; complete these procedures and show some test cases
 
@@ -250,3 +262,4 @@
 ;; Problem 8
 
 ;; Problem 9
+
