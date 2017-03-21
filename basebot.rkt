@@ -46,7 +46,7 @@
 
 (define assertN
   (lambda (func expected name)
-  (if (= func expected)
+  (if (equal? func expected)
       (string-append name " passes")
       (string-append  name " does not pass.  the expected value does not match the actual value: " func))))
 ;; Problem 1
@@ -68,23 +68,30 @@
 
 (define root1
   (lambda (a b c)
-    (/ (+ (- 0 b) (sqrt (- (* b b) (* 4 a c)))) (* 2 a))))
-(integer? 1)
+    (if (integer? (sqrt (- (* b b) (* 4 a c))))
+        (/ (+ (- 0 b) (sqrt (- (* b b) (* 4 a c)))) (* 2 a))
+        #f))
+  )
 
 (define root2
   (lambda (a b c)
- (/ (- (- 0 b) (sqrt (- (* b b) (* 4 a c)))) (* 2 a))))
+    (if (integer? (sqrt (- (* b b) (* 4 a c))))
+        (/ (- (- 0 b) (sqrt (- (* b b) (* 4 a c)))) (* 2 a))
+        #f))
+  )
 
 ;;;; tests for root1
+(root1 5 3 6)
 (assertN (root1 1 2 1) -1 "root1: simple test" )
 (assertN (root1 1 8 7) -1 "root1: simple test negative number" )
 (assertN (root1 1 -8 7) 7 "root1: simple test positive root" )
-(assertN (root1 5 3 6) 1 "root1: handle imaginary root" )
+(assertN (root1 5 3 6) #f "root1: handle imaginary root" )
 
 ;;;; tests for root2
-(assertN (root2 1 2 1) -1 "root1: simple test" )
-(assertN (root2 1 8 7) -7 "root1: simple test negative number" )
-(assertN (root2 1 -8 7) 1 "root1: simple test positive root" )
+(assertN (root2 1 2 1) -1 "root2: simple test" )
+(assertN (root2 1 8 7) -7 "root2: simple test negative number" )
+(assertN (root2 1 -8 7) 1 "root2: simple test positive root" )
+(assertN (root2 5 3 6) #f "root2: handle imaginary root" )
 
 ;; complete these procedures and show some test cases
 
